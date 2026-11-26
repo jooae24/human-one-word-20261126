@@ -19,8 +19,11 @@ function checkEntry(text: string): void {
   if (text.includes("\n") || text.includes("\r")) {
     throw new Error("entry must be a single line");
   }
-  if (/\s/.test(text)) {
-    throw new Error("entry must be exactly one word");
+  if (text !== text.trim()) {
+    throw new Error("entry must not have leading or trailing whitespace");
+  }
+  if (!/^[A-Za-z]+$/.test(text)) {
+    throw new Error("entry must be exactly one word (letters only)");
   }
 }
 
